@@ -1,2 +1,16 @@
 Hello, how fun it is that am  trying out git 
 So am happy to check out how git makes everything easy Af😊👌
+lets start writing some code here
+import express from 'express';
+import Joi from 'joi';
+import Product from '../models/Product.js';
+import { validate } from '../middleware/validate.js';
+import { requireAuth, requireRole } from '../middleware/auth.js';
+
+const router = express.Router();
+
+router.get('/', async (req, res) => {
+  const { q, category, min, max } = req.query;
+  const filter = {};
+  if (category) filter.category = category;
+  if (min || max) filter.priceUGX = {
